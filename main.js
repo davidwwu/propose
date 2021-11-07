@@ -25,61 +25,62 @@ const getPos = (el, pos) => {
   return BOUND.top + BOUND.height * pos
 }
 
-// const TITLE = () =>
-//   timeline({
-//     scrollTrigger: {
-//       scrub: 0.5,
-//       trigger: '.section--title',
-//       pin: '.section--title .section__content',
-//       start: 'top top',
-//       end: 'bottom bottom'
-//     },
-//   })
-//     .set('.section--title .section__content .blurb p', {
-//       opacity: 1,
-//     })
-//     .to('.section--title .section__content .blurb p', {
-//       scrollTrigger: {
-//         scrub: 0.5,
-//         trigger: '.section--title',
-//         start: () => getPos(TITLE_EL, 0.1),
-//         end: () => getPos(TITLE_EL, 0.2),
-//       },
-//     })
-//     .fromTo(
-//       '.section--title .section__content .blurb p',
-//       {
-//         y: 0,
-//         opacity: 1,
-//       },
-//       {
-//         y: '-=100%',
-//         opacity: 0,
-//         scrollTrigger: {
-//           scrub: 0.5,
-//           trigger: '.section--title',
-//           start: () => getPos(TITLE_EL, 0.3),
-//           end: () => getPos(TITLE_EL, 0.4),
-//         },
-//       }
-//     )
-//     .to(
-//       '.section--title .section__content',
-//       {
-//         scrollTrigger: {
-//           scrub: 0.5,
-//           trigger: '.section--title',
-//           start: () => getPos(TITLE_EL, 0.5),
-//           end: () => getPos(TITLE_EL, 0.6),
-//           onUpdate: self =>
-//             document.documentElement.style.setProperty(
-//               '--alpha',
-//               0.5 - self.progress / 2
-//             ),
-//         },
-//       },
-//       '<'
-//     );
+const TITLE = () =>
+  timeline({
+    scrollTrigger: {
+      scrub: 0.5,
+      trigger: '.section--title',
+      pin: '.section--title .section__content',
+      start: 'top top',
+      end: 'bottom bottom'
+    },
+  })
+    .set('.section--title .section__content .blurb p', {
+      y: 0,
+      opacity: 1,
+    })
+    .to('.section--title .section__content .blurb p', {
+      scrollTrigger: {
+        scrub: 0.5,
+        trigger: '.section--title',
+        start: () => getPos(TITLE_EL, 0.1),
+        end: () => getPos(TITLE_EL, 0.2),
+      },
+    })
+    .fromTo(
+      '.section--title .section__content .blurb p',
+      {
+        y: 0,
+        opacity: 1,
+      },
+      {
+        y: '-=100%',
+        opacity: 0,
+        scrollTrigger: {
+          scrub: 0.5,
+          trigger: '.section--title',
+          start: () => getPos(TITLE_EL, 0.3),
+          end: () => getPos(TITLE_EL, 0.4),
+        },
+      }
+    )
+    .to(
+      '.section--title .section__content',
+      {
+        scrollTrigger: {
+          scrub: 0.5,
+          trigger: '.section--title',
+          start: () => getPos(TITLE_EL, 0.5),
+          end: () => getPos(TITLE_EL, 0.6),
+          onUpdate: self =>
+            document.documentElement.style.setProperty(
+              '--alpha',
+              0.5 - self.progress / 2
+            ),
+        },
+      },
+      '<'
+    );
 
 const INTRO = () =>
   timeline({
@@ -346,7 +347,7 @@ function render() {
 
 
 timeline()
-  // .add(TITLE())
+  .add(TITLE())
   .add(INTRO())
   .add(BLURB1())
   .add(DANCE())
