@@ -17,8 +17,9 @@ const RANGE = (x1, y1, x2, y2, a) => LERP(x2, y2, INVLERP(x1, y1, a))
  * Apple does nothing.
  * Overlay some text with a darker backdrop that covers the apple
  */
-const TITLE_EL = document.querySelector('.section--title')
-const INTRO_EL = document.querySelector('.section--intro')
+const TITLE_EL = document.querySelector('.section--title');
+const INTRO_EL = document.querySelector('.section--intro');
+const get_secs_el = (num) => document.querySelector('.section--' + num);
 const BLURB1_EL = document.querySelector('.section--blurb1');
 const getPos = (el, pos) => {
   const BOUND = el.getBoundingClientRect()
@@ -300,7 +301,7 @@ const context = canvas.getContext("2d");
 
 canvas.width = 1980 ;
 canvas.height =  3520;
-const frameCount = 8;
+const frameCount = 9;
 const currentFrame = index => (
   `img/susa_dance_${index + 1}.jp2`
 );
@@ -345,10 +346,118 @@ function render() {
   context.drawImage(images[airpods.frame], 0, 0); 
 }
 
+const SECS = (num) =>
+  timeline({
+    scrollTrigger: {
+      scrub: 0.5,
+      trigger: '.section--' + num,
+      pin: '.section--' + num + ' .section__content',
+      start: 'top top',
+      end: 'bottom bottom',
+    },
+  })
+    .set('.section--' + num +' .section__content .text', {
+      y: '+=100%',
+      opacity: 0
+    })
+    .set('.section--' + num +' .section__content .blurb p', {
+      y: '+=100%',
+      opacity: 0,
+    })
+    .to('.section--' + num +' .section__content', {
+      scrollTrigger: {
+        scrub: 0.5,
+        trigger: '.section--' + num,
+        start: 'top top',
+        end: 'top -=25%',
+        onUpdate: self =>
+          document.documentElement.style.setProperty(
+            '--alpha',
+            self.progress / 2
+          ),
+      },
+    })
+    .to('.section--' + num +' .section__content .text', {
+      y: 0,
+      opacity: 1,
+      stagger: 0.1,
+      scrollTrigger: {
+        scrub: 0.5,
+        trigger: '.section--' + num,
+        start: () => getPos(get_secs_el(num), 0.1),
+        end: () => getPos(get_secs_el(num), 0.2),
+      },
+    })
+    .fromTo(
+      '.section--' + num +' .section__content .text',
+      {
+        y: 0,
+        opacity: 1,
+      },
+      {
+        y: '-=100%',
+        opacity: 0,
+        stagger: 0.1,
+        scrollTrigger: {
+          scrub: 0.5,
+          trigger: '.section--' + num,
+          start: () => getPos(get_secs_el(num), 0.3),
+          end: () => getPos(get_secs_el(num), 0.4),
+        },
+      }
+    )
+    .to('.section--' + num +' .section__content .blurb p', {
+      y: 0,
+      opacity: 1,
+      scrollTrigger: {
+        scrub: 0.5,
+        trigger: '.section--' + num,
+        start: () => getPos(get_secs_el(num), 0.5),
+        end: () => getPos(get_secs_el(num), 0.6),
+      },
+    })
+    .fromTo(
+      '.section--' + num +' .section__content .blurb p',
+      {
+        y: 0,
+        opacity: 1,
+      },
+      {
+        y: '-=100%',
+        opacity: 0,
+        scrollTrigger: {
+          scrub: 0.5,
+          trigger: '.section--' + num,
+          start: () => getPos(get_secs_el(num), 0.7),
+          end: () => getPos(get_secs_el(num), 0.8),
+        },
+      }
+    )
+    .to(
+      '.section--2 .section__content',
+      {
+        scrollTrigger: {
+          scrub: 0.5,
+          trigger: '.section--' + num,
+          start: () => getPos(get_secs_el(num), 0.7),
+          end: () => getPos(get_secs_el(num), 0.8),
+          onUpdate: self =>
+            document.documentElement.style.setProperty(
+              '--alpha',
+              0.5 - self.progress / 2
+            ),
+        },
+      },
+      '<'
+    );
+
+
 
 timeline()
   .add(TITLE())
   .add(INTRO())
-  .add(BLURB1())
   .add(DANCE())
-
+  .add(BLURB1())
+  .add(SECS(2))
+  .add(SECS(3))
+  

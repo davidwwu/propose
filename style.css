@@ -49,20 +49,31 @@ video {
   justify-content: center;
   position: relative;
 }
-.section--title,
+.section--title {
+  height: 100vh;
+}
 .section--intro,
+.section--2,
+.section--3,
+.section--4,
 .section--lerping,
 .section--blurb1,
 .section--dance {
   height: 300vh;
 }
 .section--title .section__content,
+.section--2 .section__content,
+.section--3 .section__content,
+.section--4 .section__content,
 .section--intro .section__content,
 .section--blurb1 .section__content {
   background: hsla(0, 0%, 7%, var(--alpha));
   color: var(--white-text);
 }
-.section--intro .text {
+.section--intro .text,
+.section--4 .text,
+.section--3 .text,
+.section--2 .text {
   opacity: 0;
   transform: translate(0, 100%);
 }
