@@ -18,9 +18,10 @@ const RANGE = (x1, y1, x2, y2, a) => LERP(x2, y2, INVLERP(x1, y1, a))
  * Overlay some text with a darker backdrop that covers the apple
  */
 const TITLE_EL = document.querySelector('.section--title');
-const INTRO_EL = document.querySelector('.section--intro');
+// const INTRO_EL = document.querySelector('.section--intro');
 const get_secs_el = (num) => document.querySelector('.section--' + num);
-const BLURB1_EL = document.querySelector('.section--blurb1');
+const get_blurb_el = (num) => document.querySelector('.section--blurb' + num);
+// const BLURB1_EL = document.querySelector('.section--blurb1');
 const getPos = (el, pos) => {
   const BOUND = el.getBoundingClientRect()
   return BOUND.top + BOUND.height * pos
@@ -83,110 +84,110 @@ const TITLE = () =>
       '<'
     );
 
-const INTRO = () =>
-  timeline({
-    scrollTrigger: {
-      scrub: 0.5,
-      trigger: '.section--intro',
-      pin: '.section--intro .section__content',
-      start: 'top top',
-      end: 'bottom bottom',
-    },
-  })
-    .set('.section--intro .section__content .text', {
-      y: '+=100%',
-      opacity: 0
-    })
-    .set('.section--intro .section__content .blurb p', {
-      y: '+=100%',
-      opacity: 0,
-    })
-    .to('.section--intro .section__content', {
-      scrollTrigger: {
-        scrub: 0.5,
-        trigger: '.section--intro',
-        start: 'top top',
-        end: 'top -=25%',
-        onUpdate: self =>
-          document.documentElement.style.setProperty(
-            '--alpha',
-            self.progress / 2
-          ),
-      },
-    })
-    .to('.section--intro .section__content .text', {
-      y: 0,
-      opacity: 1,
-      stagger: 0.1,
-      scrollTrigger: {
-        scrub: 0.5,
-        trigger: '.section--intro',
-        start: () => getPos(INTRO_EL, 0.1),
-        end: () => getPos(INTRO_EL, 0.2),
-      },
-    })
-    .fromTo(
-      '.section--intro .section__content .text',
-      {
-        y: 0,
-        opacity: 1,
-      },
-      {
-        y: '-=100%',
-        opacity: 0,
-        stagger: 0.1,
-        scrollTrigger: {
-          scrub: 0.5,
-          trigger: '.section--intro',
-          start: () => getPos(INTRO_EL, 0.3),
-          end: () => getPos(INTRO_EL, 0.4),
-        },
-      }
-    )
-    .to('.section--intro .section__content .blurb p', {
-      y: 0,
-      opacity: 1,
-      scrollTrigger: {
-        scrub: 0.5,
-        trigger: '.section--intro',
-        start: () => getPos(INTRO_EL, 0.5),
-        end: () => getPos(INTRO_EL, 0.6),
-      },
-    })
-    .fromTo(
-      '.section--intro .section__content .blurb p',
-      {
-        y: 0,
-        opacity: 1,
-      },
-      {
-        y: '-=100%',
-        opacity: 0,
-        scrollTrigger: {
-          scrub: 0.5,
-          trigger: '.section--intro',
-          start: () => getPos(INTRO_EL, 0.7),
-          end: () => getPos(INTRO_EL, 0.8),
-        },
-      }
-    )
-    .to(
-      '.section--intro .section__content',
-      {
-        scrollTrigger: {
-          scrub: 0.5,
-          trigger: '.section--intro',
-          start: () => getPos(INTRO_EL, 0.7),
-          end: () => getPos(INTRO_EL, 0.8),
-          onUpdate: self =>
-            document.documentElement.style.setProperty(
-              '--alpha',
-              0.5 - self.progress / 2
-            ),
-        },
-      },
-      '<'
-    );
+// const INTRO = () =>
+//   timeline({
+//     scrollTrigger: {
+//       scrub: 0.5,
+//       trigger: '.section--intro',
+//       pin: '.section--intro .section__content',
+//       start: 'top top',
+//       end: 'bottom bottom',
+//     },
+//   })
+//     .set('.section--intro .section__content .text', {
+//       y: '+=100%',
+//       opacity: 0
+//     })
+//     .set('.section--intro .section__content .blurb p', {
+//       y: '+=100%',
+//       opacity: 0,
+//     })
+//     .to('.section--intro .section__content', {
+//       scrollTrigger: {
+//         scrub: 0.5,
+//         trigger: '.section--intro',
+//         start: 'top top',
+//         end: 'top -=25%',
+//         onUpdate: self =>
+//           document.documentElement.style.setProperty(
+//             '--alpha',
+//             self.progress / 2
+//           ),
+//       },
+//     })
+//     .to('.section--intro .section__content .text', {
+//       y: 0,
+//       opacity: 1,
+//       stagger: 0.1,
+//       scrollTrigger: {
+//         scrub: 0.5,
+//         trigger: '.section--intro',
+//         start: () => getPos(INTRO_EL, 0.1),
+//         end: () => getPos(INTRO_EL, 0.2),
+//       },
+//     })
+//     .fromTo(
+//       '.section--intro .section__content .text',
+//       {
+//         y: 0,
+//         opacity: 1,
+//       },
+//       {
+//         y: '-=100%',
+//         opacity: 0,
+//         stagger: 0.1,
+//         scrollTrigger: {
+//           scrub: 0.5,
+//           trigger: '.section--intro',
+//           start: () => getPos(INTRO_EL, 0.3),
+//           end: () => getPos(INTRO_EL, 0.4),
+//         },
+//       }
+//     )
+//     .to('.section--intro .section__content .blurb p', {
+//       y: 0,
+//       opacity: 1,
+//       scrollTrigger: {
+//         scrub: 0.5,
+//         trigger: '.section--intro',
+//         start: () => getPos(INTRO_EL, 0.5),
+//         end: () => getPos(INTRO_EL, 0.6),
+//       },
+//     })
+//     .fromTo(
+//       '.section--intro .section__content .blurb p',
+//       {
+//         y: 0,
+//         opacity: 1,
+//       },
+//       {
+//         y: '-=100%',
+//         opacity: 0,
+//         scrollTrigger: {
+//           scrub: 0.5,
+//           trigger: '.section--intro',
+//           start: () => getPos(INTRO_EL, 0.7),
+//           end: () => getPos(INTRO_EL, 0.8),
+//         },
+//       }
+//     )
+//     .to(
+//       '.section--intro .section__content',
+//       {
+//         scrollTrigger: {
+//           scrub: 0.5,
+//           trigger: '.section--intro',
+//           start: () => getPos(INTRO_EL, 0.7),
+//           end: () => getPos(INTRO_EL, 0.8),
+//           onUpdate: self =>
+//             document.documentElement.style.setProperty(
+//               '--alpha',
+//               0.5 - self.progress / 2
+//             ),
+//         },
+//       },
+//       '<'
+//     );
 
 const delSections = document.querySelectorAll(".delayed-section");
 
@@ -223,24 +224,24 @@ delSections.forEach(section => {
   });
 });
 
-const BLURB1 = () =>
+const BLURBS = (num) =>
   timeline({
     scrollTrigger: {
       scrub: 0.5,
-      trigger: '.section--blurb1',
-      pin: '.section--blurb1 .section__content',
+      trigger: '.section--blurb' + num,
+      pin: '.section--blurb' + num + ' .section__content',
       start: 'top top',
       end: 'bottom bottom'
     },
   })
-    .set('.section--blurb1 .section__content .blurb p', {
+    .set('.section--blurb' + num + ' .section__content .blurb p', {
       y: '+=100%',
       opacity: 0,
     })
-    .to('.section--blurb1 .section__content', {
+    .to('.section--blurb' + num + ' .section__content', {
       scrollTrigger: {
         scrub: 0.5,
-        trigger: '.section--blurb1',
+        trigger: '.section--blurb' + num,
         start: 'top top',
         end: 'top -=25%',
         onUpdate: self =>
@@ -250,18 +251,18 @@ const BLURB1 = () =>
           ),
       },
     })
-    .to('.section--blurb1 .section__content .blurb p', {
+    .to('.section--blurb' + num + ' .section__content .blurb p', {
       y: 0,
       opacity: 1,
       scrollTrigger: {
         scrub: 0.5,
-        trigger: '.section--blurb1',
-        start: () => getPos(BLURB1_EL, 0.2),
-        end: () => getPos(BLURB1_EL, 0.3),
+        trigger: '.section--blurb' + num,
+        start: () => getPos(get_blurb_el(num), 0.2),
+        end: () => getPos(get_blurb_el(num), 0.3),
       },
     })
     .fromTo(
-      '.section--blurb1 .section__content .blurb p',
+      '.section--blurb' + num + ' .section__content .blurb p',
       {
         y: 0,
         opacity: 1,
@@ -271,20 +272,20 @@ const BLURB1 = () =>
         opacity: 0,
         scrollTrigger: {
           scrub: 0.5,
-          trigger: '.section--blurb1',
-          start: () => getPos(BLURB1_EL, 0.4),
-          end: () => getPos(BLURB1_EL, 0.5),
+          trigger: '.section--blurb' + num,
+          start: () => getPos(get_blurb_el(num), 0.4),
+          end: () => getPos(get_blurb_el(num), 0.5),
         },
       }
     )
     .to(
-      '.section--blurb1 .section__content',
+      '.section--blurb' + num + ' .section__content',
       {
         scrollTrigger: {
           scrub: 0.5,
-          trigger: '.section--blurb1',
-          start: () => getPos(BLURB1_EL, 0.4),
-          end: () => getPos(BLURB1_EL, 0.5),
+          trigger: '.section--blurb' + num,
+          start: () => getPos(get_blurb_el(num), 0.4),
+          end: () => getPos(get_blurb_el(num), 0.5),
           onUpdate: self =>
             document.documentElement.style.setProperty(
               '--alpha',
@@ -307,7 +308,7 @@ const currentFrame = index => (
 );
 
 const images = []
-const airpods = {
+const danceMoves = {
   frame: 0
 };
 
@@ -327,7 +328,7 @@ const DANCE = () =>
       end: 'bottom bottom',
     },
   })
-    .to(airpods, {
+    .to(danceMoves, {
       frame: frameCount - 1,
       snap: "frame",
       scrollTrigger: {
@@ -343,7 +344,7 @@ images[0].onload = render;
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  context.drawImage(images[airpods.frame], 0, 0); 
+  context.drawImage(images[danceMoves.frame], 0, 0); 
 }
 
 const SECS = (num) =>
@@ -434,7 +435,7 @@ const SECS = (num) =>
       }
     )
     .to(
-      '.section--2 .section__content',
+      '.section--' + num + ' .section__content',
       {
         scrollTrigger: {
           scrub: 0.5,
@@ -455,9 +456,17 @@ const SECS = (num) =>
 
 timeline()
   .add(TITLE())
-  .add(INTRO())
+  .add(SECS(1))
   .add(DANCE())
-  .add(BLURB1())
+  .add(BLURBS(1))
   .add(SECS(2))
   .add(SECS(3))
+  .add(SECS(4))
+  .add(SECS(5))
+  .add(SECS(6))
+  .add(SECS(7))
+  .add(SECS(8))
+  .add(SECS(9))
+  .add(BLURBS(2))
+  .add(BLURBS(3))
   

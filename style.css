@@ -52,28 +52,22 @@ video {
 .section--title {
   height: 100vh;
 }
-.section--intro,
-.section--2,
-.section--3,
-.section--4,
-.section--lerping,
-.section--blurb1,
+
+.stepping-text,
 .section--dance {
   height: 300vh;
 }
+.stepping-text.short,
+.section--lerping {
+  height: 200vh;
+}
 .section--title .section__content,
-.section--2 .section__content,
-.section--3 .section__content,
-.section--4 .section__content,
-.section--intro .section__content,
-.section--blurb1 .section__content {
+.stepping-text .section__content {
   background: hsla(0, 0%, 7%, var(--alpha));
   color: var(--white-text);
 }
-.section--intro .text,
-.section--4 .text,
-.section--3 .text,
-.section--2 .text {
+
+.stepping-text .text {
   opacity: 0;
   transform: translate(0, 100%);
 }
