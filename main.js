@@ -304,7 +304,7 @@ canvas.width = 1980 ;
 canvas.height =  3520;
 const frameCount = 9;
 const currentFrame = index => (
-  `img/susa_dance_${index + 1}.jp2`
+  `./img/susa_dance_${index + 1}.jp2`
 );
 
 const images = []
