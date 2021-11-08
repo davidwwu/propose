@@ -5,6 +5,10 @@ const {
 
 registerPlugin(ScrollTrigger)
 
+ScrollTrigger.addEventListener('refresh', () => {
+  document.documentElement.scrollTop = 0
+})
+
 // Utility function - h/t to https://www.trysmudford.com/blog/linear-interpolation-functions/
 const LERP = (x, y, a) => x * (1 - a) + y * a
 const CLAMP = (a, min = 0, max = 1) => Math.min(max, Math.max(min, a))
